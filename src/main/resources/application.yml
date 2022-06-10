@@ -1,0 +1,55 @@
+# 端口 项目根
+server:
+  port: 8088
+  servlet:
+    context-path: /
+    # 配置响应消息编码
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+# spring
+spring:
+  # 程序主入口
+  main:
+    allow-circular-references: true
+  # thymeleaf的模板缓存会在第一次对模板解析之后进行缓存,极大提高了并发处理能力。但是这给我们开发带来了不便，修改页面后并不会立刻看到效果，我们开发阶段可以关掉缓存使用
+  thymeleaf:
+    cache: false
+  # mvc
+  mvc:
+    # 视图渲染
+    view:
+      prefix: /pages/
+      suffix: .jsp
+  # 数据库数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/membergl?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # 心跳检查
+      idle-timeout: 60000
+      # 连接的超时时间
+      connection-timeout: 60000
+      # 接校验的超时时间
+      validation-timeout: 3000
+      # 连接数据库的超时时间
+      login-timeout: 5
+      # 连接池中连接的最大生存时间，毫秒单位
+      max-lifetime: 1800000
+      maximum-pool-size: 60
+      minimum-idle: 10
+      # 该属性表示连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中，以识别池和池配置。 默认值：自动生成
+      pool-name: BizvaneHikariCP
+  # json数据
+  jackson:
+    # 日期格式化  表示月份是大写的 M  表示分钟则是小写的 m  24 小时制的是大写的 H  12 小时制的则是小写的 h。
+    date-format: yyyy-MM-dd HH:mm;ss
+
+# 数据分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
